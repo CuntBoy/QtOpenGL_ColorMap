@@ -1,7 +1,8 @@
-#include "colormap.h"
 #include "mainwindow.h"
 
 #include <QApplication>
+
+#include <colormap/colormap.h>
 
 int main(int argc, char *argv[])
 {

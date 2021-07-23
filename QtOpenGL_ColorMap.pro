@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,17 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    colormap.cpp \
-    colormapwidget.cpp \
+    colormap/colormap.cpp \
+    colormap/colormapwidget.cpp \
     colorscale.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    windowcenterwidget.cpp
 
 HEADERS += \
-    colormap.h \
-    colormapwidget.h \
+    colormap/colormap.h \
+    colormap/colormapwidget.h \
     colorscale.h \
-    mainwindow.h
+    mainwindow.h \
+    windowcenterwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,11 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "colormapwidget.h"
+#include "windowcenterwidget.h"
 
 #include <QMainWindow>
 
 // 窗口基类
+
 // -- 菜单栏
 // 工具栏
 // center window
@@ -20,7 +21,7 @@ public:
 
 protected:
     // center window
-    ColorMapWidget * center_window;
+    WindowCenterWidget * center_window;
 
     QMenu * file_menu;
     QMenu * help_menu;

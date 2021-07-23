@@ -1,7 +1,8 @@
 #ifndef COLORSCALE_H
 #define COLORSCALE_H
-
 #include <QWidget>
+
+// color scale
 
 class ColorScale final: public QWidget
 {

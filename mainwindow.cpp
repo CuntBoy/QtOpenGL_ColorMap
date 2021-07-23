@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("ColorMap Window");
 
     // center winodw
-    center_window = new ColorMapWidget(this);
-    center_window->setAutoFillBackground(true);  // 自动填充背景
-    setCentralWidget(center_window);
+    //center_window = new WindowCenterWidget(this);
+    //center_window->setAutoFillBackground(true);  // 自动填充背景
+    //setCentralWidget(center_window);
 
     initMenuBar();  // 添加菜单
     initToolBar();
