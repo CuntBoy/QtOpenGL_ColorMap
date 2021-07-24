@@ -1,19 +1,16 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <colormap/colormap.h>
-#define COLORMAP_TEST
+#include <colormap/colormapdata.h>
+#include "example/example_one.h"
+
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    ColorMap colormap_widget;
-
-#ifdef COLORMAP_TEST
-    // 创建绘图的数据
-    colormap_widget.colormap();
-#endif
-    colormap_widget.show();
+    std::shared_ptr<ColorMap> widget(example_one().get());
+    widget->show();
 
     return a.exec();
 }

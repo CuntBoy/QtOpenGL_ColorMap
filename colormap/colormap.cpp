@@ -23,7 +23,10 @@ ColorMap::~ColorMap()
 
 }
 
-void ColorMap::colormap()
+void ColorMap::colormap(const std::shared_ptr<DrawData> data_)
 {
-
+    colormap_data_.reset(data_.get());
+    auto centerWidget = static_cast<ColorMapWidget *>(this->centralWidget());
+    centerWidget->colormapData(colormap_data_);
 }
+

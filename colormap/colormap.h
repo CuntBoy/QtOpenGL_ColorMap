@@ -2,6 +2,7 @@
 #define COLORMAP_H
 
 #include "mainwindow.h"
+#include "drawdata.h"
 
 // 绘图窗口
 
@@ -13,8 +14,10 @@ public:
     ~ColorMap() override;
 
     // 绘制图形的函数-- 会将构建好的数据 设置给 center widget(QOpenglWidget 进行初始化)
-    void colormap();
+    void colormap(const std::shared_ptr<DrawData> data_);
 
+private:
+    std::shared_ptr<DrawData> colormap_data_;
 
 signals:
 

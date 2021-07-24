@@ -16,9 +16,6 @@ void ColorMapWidget::initialize()
     view_port_x = 0;
     view_port_y = 0;
 
-#ifdef TEST_VIEWPORT
-    test_image = QImage(":/pic/images/test_image.JPG"); // .scaled(QSize(640,480),Qt::KeepAspectRatio,Qt::SmoothTransformation);
-#endif
 }
 
 void ColorMapWidget::initializeGL()
@@ -39,11 +36,6 @@ void ColorMapWidget::resizeGL(int w, int h)
     //glViewport(0, 0, w, h);
     glViewport(view_port_x,view_port_y,view_port_size.width(),view_port_size.height());
 
-#ifdef TEST_VIEWPORT
-    // 此处会导致 失真
-    test_image = test_image.scaled(QSize(w,h),Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
-#endif
-
 }
 
 void ColorMapWidget::paintGL()
@@ -52,11 +44,9 @@ void ColorMapWidget::paintGL()
     glClearColor(0.0,1.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-#ifdef TEST_VIEWPORT
-    QPainter painter(this);
-    painter.begin(this);
-    painter.drawImage(0,0,test_image);
-    painter.end();
-#endif
+}
 
+void ColorMapWidget::colormapData(std::shared_ptr<DrawData> data_)
+{
+    colormap_data.reset(data_.get());
 }

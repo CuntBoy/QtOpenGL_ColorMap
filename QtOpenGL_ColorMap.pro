@@ -17,16 +17,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     colormap/colormap.cpp \
+    colormap/colormapdata.cpp \
     colormap/colormapwidget.cpp \
     colorscale.cpp \
+    drawdata.cpp \
     main.cpp \
     mainwindow.cpp \
     windowcenterwidget.cpp
 
 HEADERS += \
     colormap/colormap.h \
+    colormap/colormapdata.h \
     colormap/colormapwidget.h \
     colorscale.h \
+    drawdata.h \
+    example/example_one.h \
     mainwindow.h \
     windowcenterwidget.h
 

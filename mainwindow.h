@@ -2,12 +2,10 @@
 #define MAINWINDOW_H
 
 #include "windowcenterwidget.h"
-
 #include <QMainWindow>
 
 // 窗口基类
-
-// -- 菜单栏
+// 菜单栏
 // 工具栏
 // center window
 // 状态栏
@@ -27,7 +25,6 @@ protected:
     QMenu * help_menu;
     QMenu * edit_menu;
 
-
 private:
     void initMenuBar();    // 初始化 菜单栏
     void initToolBar();    // 初始化 工具栏
@@ -36,8 +33,6 @@ private:
 signals:
 
 public slots:
-
-
 
 
 };
