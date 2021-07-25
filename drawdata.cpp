@@ -31,3 +31,46 @@ unsigned int *DrawData::indicesData()
 {
     return indices_.data();
 }
+
+void DrawData::calculateBoundary(const double *dst_, double *target_, const int len)
+{
+    // 使用传如的数据生成一组新的数据
+
+    if(len == 1)  //只有一个数
+    {
+        return ;
+    }
+
+    target_[0] = dst_[0] - (dst_[1] - dst_[0]) / 2.0;
+
+    for(auto i = 1;i < len;i++)
+    {
+        target_[i] = dst_[i -1] + (dst_[i] -dst_[i-1]) / 2.0;
+    }
+
+    target_[len] = dst_[len - 1] + (dst_[len -1] - dst_[len - 2])/2.0;
+
+}
+
+
+#if 0
+template<typename T1, typename T2>
+static void DrawData::calculateBoundary(const T1 *dst_, T1 *target_, const T2 len)
+{
+    // 使用传如的数据生成一组新的数据
+
+    if(len == 1)  //只有一个数
+    {
+        return ;
+    }
+
+    target_[0] = dst_[0] - (dst_[1] - dst_[0]) / 2.0;
+
+    for(auto i = 1;i < len - 1;i++)
+    {
+        target_[i] = dst_[i -1] + (dst_[i] -dst_[i-1]) / 2.0;
+    }
+
+    target_[len] = dst_[len - 1] + (dst_[len -1] - dst_[len - 2])/2.0;
+}
+#endif

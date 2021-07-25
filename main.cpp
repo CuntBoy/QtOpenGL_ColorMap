@@ -9,7 +9,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    std::shared_ptr<ColorMap> widget(example_one().get());
+    //std::shared_ptr<ColorMap> widget(example_one().get());
+    std::shared_ptr<ColorMap> widget(example_one());
     widget->show();
 
     return a.exec();

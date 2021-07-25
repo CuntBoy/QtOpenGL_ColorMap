@@ -24,9 +24,20 @@ public:
     // 获取索引数据的指针
     unsigned int * indicesData();
 
+    static void calculateBoundary(const double *dst_, double * target_,const int len);
+
+#if 0
+    template<typename T1,typename T2 = int>
+    static void calculateBoundary(const T1 *dst_, T1 * target_,const T2 len);
+#endif
+
 protected:
     std::vector<double> vertices_;        // 顶点数据
     std::vector<unsigned int> indices_;   // 顶点的索引数据
+
+
+
+
 };
 
 #endif // DRAWDATA_H
