@@ -15,16 +15,20 @@ public:
     ~DrawData();
 
     // 重新设置顶点数据-vector的大小
-    void resizeVerticesData(uint64_t dataSize);
+    void resizeVerticesData(uint64_t dataSize = 0);
     // 获取顶点数据的指针
     double * verticesData();
 
     // 重新设置缩影数据-vector的大小
-    void resizeIndicesData(uint64_t dataSize);
+    void resizeIndicesData(uint64_t dataSize = 0);
     // 获取索引数据的指针
     unsigned int * indicesData();
 
     static void calculateBoundary(const double *dst_, double * target_,const int len);
+
+    static void showData(const double * data,int len);
+
+
 
 #if 0
     template<typename T1,typename T2 = int>

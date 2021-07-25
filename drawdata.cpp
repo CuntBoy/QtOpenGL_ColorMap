@@ -1,4 +1,5 @@
 #include "drawdata.h"
+#include <QDebug>
 
 DrawData::DrawData()
 {
@@ -14,6 +15,11 @@ DrawData::~DrawData()
 
 void DrawData::resizeVerticesData(uint64_t dataSize)
 {
+    if(dataSize == 0)
+    {
+        vertices_.clear();
+        return ;
+    }
     vertices_.resize(dataSize);
 }
 
@@ -24,6 +30,11 @@ double *DrawData::verticesData()
 
 void DrawData::resizeIndicesData(uint64_t dataSize)
 {
+    if(dataSize == 0)
+    {
+        indices_.clear();
+        return ;
+    }
     indices_.resize(dataSize);
 }
 
@@ -50,6 +61,14 @@ void DrawData::calculateBoundary(const double *dst_, double *target_, const int 
 
     target_[len] = dst_[len - 1] + (dst_[len -1] - dst_[len - 2])/2.0;
 
+}
+
+void DrawData::showData(const double *data, int len)
+{
+    for(auto i = 0;i < len;i++)
+    {
+        qDebug()<<data[i]<<endl;
+    }
 }
 
 
