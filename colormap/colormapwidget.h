@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QSize>
 #include <drawdata.h>
+#include <iostream>
 
 // color map center widget
 

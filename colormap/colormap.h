@@ -3,6 +3,7 @@
 
 #include "mainwindow.h"
 #include "drawdata.h"
+#include <iostream>
 
 // 绘图窗口
 

@@ -27,9 +27,9 @@ ColorMapData::ColorMapData(const double *xdata, const double *ydata, int xlen, i
 
 ColorMapData::ColorMapData(const int xsize, const int ysize, const double * data_)
 {
-    Q_UNUSED(xsize);
-    Q_UNUSED(ysize);
-    Q_UNUSED(data_);
+    Q_UNUSED(xsize)
+    Q_UNUSED(ysize)
+    Q_UNUSED(data_)
 }
 
 ColorMapData::~ColorMapData()
