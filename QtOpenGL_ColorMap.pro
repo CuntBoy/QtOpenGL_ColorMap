@@ -17,9 +17,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     colormap/colormap.cpp \
+    colormap/colormapcoordinate.cpp \
     colormap/colormapdata.cpp \
     colormap/colormapwidget.cpp \
     colorscale.cpp \
+    coordinatesystem.cpp \
     drawdata.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -27,9 +29,11 @@ SOURCES += \
 
 HEADERS += \
     colormap/colormap.h \
+    colormap/colormapcoordinate.h \
     colormap/colormapdata.h \
     colormap/colormapwidget.h \
     colorscale.h \
+    coordinatesystem.h \
     drawdata.h \
     example/example_one.h \
     mainwindow.h \

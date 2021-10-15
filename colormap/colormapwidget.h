@@ -14,7 +14,7 @@ class ColorMapWidget final: public WindowCenterWidget
     Q_OBJECT
 public:
     explicit ColorMapWidget(QWidget *parent = nullptr);
-    void colormapData(std::shared_ptr<DrawData> data_);
+    void colormapData(DrawData*data_);
 
 protected:
     void initialize();   // 初始化
@@ -27,7 +27,7 @@ private:
     int view_port_x;
     int view_port_y;
 
-    std::shared_ptr<DrawData> colormap_data;
+    DrawData* colormap_data;
 
 signals:
 

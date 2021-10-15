@@ -1,8 +1,9 @@
 #ifndef COLORSCALE_H
 #define COLORSCALE_H
+
 #include <QWidget>
 
-// color scale
+// color scale -- 颜色窗口 -- 用于绘制显示的Color Bar
 
 class ColorScale final: public QWidget
 {

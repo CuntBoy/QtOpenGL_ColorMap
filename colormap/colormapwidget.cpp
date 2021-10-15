@@ -46,7 +46,7 @@ void ColorMapWidget::paintGL()
 
 }
 
-void ColorMapWidget::colormapData(std::shared_ptr<DrawData> data_)
+void ColorMapWidget::colormapData(DrawData*  data_)
 {
-    colormap_data.reset(data_.get());
+    colormap_data = data_;
 }

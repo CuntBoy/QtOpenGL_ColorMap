@@ -15,7 +15,7 @@ std::shared_ptr<ColorMap> example_one()
     data.reset(new ColorMapData);
 
     // 将数据设置给OPenGL
-    widget->colormap(data);
+    widget->colormap(data.get());
 
     return widget;
 }

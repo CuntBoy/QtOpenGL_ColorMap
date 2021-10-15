@@ -18,7 +18,7 @@ public:
     ~MainWindow() override;
 
 protected:
-    // center window
+    // center window -- 绘制opengl的图
     WindowCenterWidget * center_window;
 
     QMenu * file_menu;
