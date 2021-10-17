@@ -2,10 +2,10 @@
 #define COLORMAPWIDGET_H
 
 // #define TEST_VIEWPORT
-#include "windowcenterwidget.h"
+#include "base/windowcenterwidget.h"
 #include <QWidget>
 #include <QSize>
-#include <drawdata.h>
+#include <base/drawdata.h>
 
 // color map center widget
 

@@ -1,8 +1,8 @@
 #ifndef COLORMAP_H
 #define COLORMAP_H
 
-#include "mainwindow.h"
-#include "drawdata.h"
+#include <base/mainwindow.h>
+#include <base/drawdata.h>
 
 // 绘图窗口
 

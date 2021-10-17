@@ -16,28 +16,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    base/colorscale.cpp \
+    base/coordinatesystem.cpp \
+    base/drawdata.cpp \
+    base/mainwindow.cpp \
+    base/windowcenterwidget.cpp \
     colormap/colormap.cpp \
     colormap/colormapcoordinate.cpp \
     colormap/colormapdata.cpp \
     colormap/colormapwidget.cpp \
-    colorscale.cpp \
-    coordinatesystem.cpp \
-    drawdata.cpp \
     main.cpp \
-    mainwindow.cpp \
-    windowcenterwidget.cpp
 
 HEADERS += \
+    base/colorscale.h \
+    base/drawdata.h \
+    base/mainwindow.h \
+    base/windowcenterwidget.h \
     colormap/colormap.h \
     colormap/colormapcoordinate.h \
     colormap/colormapdata.h \
     colormap/colormapwidget.h \
-    colorscale.h \
-    coordinatesystem.h \
-    drawdata.h \
-    example/example_one.h \
-    mainwindow.h \
-    windowcenterwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

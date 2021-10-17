@@ -14,7 +14,7 @@ public:
     DrawData();
     ~DrawData();
 
-    // 重新设置顶点数据-vector的大小
+    // 重新设置顶点数据-vector的大小 -- 默认置空
     void resizeVerticesData(uint64_t dataSize = 0);
     // 获取顶点数据的指针
     double * verticesData();

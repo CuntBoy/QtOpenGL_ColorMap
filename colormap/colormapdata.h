@@ -1,7 +1,7 @@
 #ifndef COLORMAPDATA_H
 #define COLORMAPDATA_H
 
-#include <drawdata.h>
+#include <base/drawdata.h>
 
 class ColorMapData : public DrawData
 {
