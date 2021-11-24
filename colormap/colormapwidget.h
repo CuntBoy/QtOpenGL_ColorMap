@@ -1,8 +1,7 @@
 #ifndef COLORMAPWIDGET_H
 #define COLORMAPWIDGET_H
 
-// #define TEST_VIEWPORT
-#include "base/windowcenterwidget.h"
+#include <base/windowcenterwidget.h>
 #include <QWidget>
 #include <QSize>
 #include <base/drawdata.h>
@@ -23,10 +22,6 @@ protected:
     void paintGL() override;
 
 private:
-    QSize view_port_size;
-    int view_port_x;
-    int view_port_y;
-
     DrawData* colormap_data;
 
 signals:

@@ -5,14 +5,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-{
-    resize(QSize(640,480));
-    setWindowTitle("ColorMap Window");
+{    resize(QSize(640,480));
+     setWindowTitle("ColorMap Window");
 
-    // center winodw
-    //center_window = new WindowCenterWidget(this);
-    //center_window->setAutoFillBackground(true);  // 自动填充背景
-    //setCentralWidget(center_window);
 
     initMenuBar();  // 添加菜单
     initToolBar();

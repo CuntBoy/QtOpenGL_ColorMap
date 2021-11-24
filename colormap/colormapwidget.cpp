@@ -12,9 +12,6 @@ ColorMapWidget::ColorMapWidget(QWidget *parent)
 
 void ColorMapWidget::initialize()
 {
-    view_port_size = QSize(640,480);
-    view_port_x = 0;
-    view_port_y = 0;
 
 }
 
@@ -26,16 +23,7 @@ void ColorMapWidget::initializeGL()
 
 void ColorMapWidget::resizeGL(int w, int h)
 {
-    // 计算显示图形的区域
-    view_port_size.setWidth(std::round(w / 3.0 * 2.0));  //向上取整
-    view_port_size.setHeight(std::round(h / 3.0 * 2.0));
-
-    view_port_x = std::round(w / 6.0);
-    view_port_y = std::round(h / 6.0);
-
-    //glViewport(0, 0, w, h);
-    glViewport(view_port_x,view_port_y,view_port_size.width(),view_port_size.height());
-
+    glViewport(0, 0, w, h);
 }
 
 void ColorMapWidget::paintGL()

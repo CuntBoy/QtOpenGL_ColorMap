@@ -3,6 +3,8 @@
 
 #include <base/drawdata.h>
 
+// 绘制 colormap 的数据
+
 class ColorMapData : public DrawData
 {
 public:

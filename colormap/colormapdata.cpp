@@ -2,6 +2,11 @@
 #include <QDebug>
 
 ColorMapData::ColorMapData()
+    :x_data_(nullptr),
+    y_data_(nullptr),
+    z_data_(nullptr),
+    x_boundary_(nullptr),
+    y_boundary_(nullptr)
 {
     resizeVerticesData(0);
     resizeIndicesData(0);

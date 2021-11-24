@@ -3,6 +3,7 @@
 
 DrawData::DrawData()
 {
+    // 初始化数组
     vertices_.clear();
     indices_.clear();
 }
