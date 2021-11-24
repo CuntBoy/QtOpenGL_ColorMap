@@ -77,4 +77,9 @@ build-QtOpenGL_ColorMap-Desktop_Qt_5_14_1_MinGW_64_bit-Debug/moc_predefs.h
 
 QtOpenGL_ColorMap.pro.user
 CMakeLists.txt.user
+
 example
+example/
+
+build/
+build
