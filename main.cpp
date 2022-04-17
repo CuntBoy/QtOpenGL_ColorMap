@@ -1,14 +1,20 @@
-#include "mainwindow.h"
+#include <base/mainwindow.h>
 #include <QApplication>
 #include <colormap/colormap.h>
 #include <colormap/colormapdata.h>
-#include "example/example_one.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     std::shared_ptr<ColorMap> widget(example_one().get());
+    //std::shared_ptr<ColorMap> widget(example_one());
     widget->show();
 
-    return a.exec();
+    ColorMap widget;
+    // TODO
+    // ColorMapData data;
+    const std::shared_ptr<ColorMapData> data(new ColorMapData());
+    widget.colorMap(data);
+    widget.show();
+    return QApplication::exec();
 }

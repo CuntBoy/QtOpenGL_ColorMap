@@ -31,7 +31,19 @@ _展示均匀数据与非均匀数据_
 
 
 
+### How to Run ?
 
+- use Cmake 
+	- 进入`CMakeLists.txt`文件所在目录，然后执行一下命令：
+
+  	```powershell
+      cd build
+      cmake ..
+  	```
+
+	- 上一步的运行结果，会生成`VS`的工程，使用`VS`打开，编译运行就行
+
+- 直接使用`QtCreator`打开
 
 
 
