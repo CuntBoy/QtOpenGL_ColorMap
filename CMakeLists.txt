@@ -8,23 +8,10 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check http://doc.qt.io/qt-5/deployment-android.html for more information.
-# They need to be set before the find_package(Qt5 ...) call.
-
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
-
-find_package(Qt5 COMPONENTS Widgets OpenGL LinguistTools REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Widgets OpenGL LinguistTools)
 
 # 语言文件
 set(TS_FILES QtOpenGL_ColorMap_zh_CN.ts)
@@ -32,30 +19,32 @@ set(TS_FILES QtOpenGL_ColorMap_zh_CN.ts)
 SET(RESOURCES_FILE colorMap.qrc)
 
 SET(HEADERS
-    base/colorscale.h
-    base/coordinatesystem.h
-    base/drawdata.h
-    base/mainwindow.h
-    base/windowcenterwidget.h
-    colormap/colormapwidget.h
-    colormap/colormapdata.h
-    colormap/colormapcoordinate.h
-    colormap/colormapcolorscale.h
-    colormap/colormap.h
+    src/base/colorscale.h
+    src/base/coordinatesystem.h
+    src/base/drawdata.h
+    src/base/mainwindow.h
+    src/base/windowcenterwidget.h
+    src/colormap/colormapwidget.h
+    src/colormap/colormapdata.h
+    src/colormap/colormapcoordinate.h
+    src/colormap/colormapcolorscale.h
+    src/colormap/colormap.h
 )
 
 SET(SOURCES
-    base/colorscale.cpp
-    base/coordinatesystem.cpp
-    base/drawdata.cpp
-    base/mainwindow.cpp
-    base/windowcenterwidget.cpp
-    colormap/colormapwidget.cpp
-    colormap/colormapdata.cpp
-    colormap/colormapcoordinate.cpp
-    colormap/colormapcolorscale.cpp
-    colormap/colormap.cpp
+    src/base/colorscale.cpp
+    src/base/coordinatesystem.cpp
+    src/base/drawdata.cpp
+    src/base/mainwindow.cpp
+    src/base/windowcenterwidget.cpp
+    src/colormap/colormapwidget.cpp
+    src/colormap/colormapdata.cpp
+    src/colormap/colormapcoordinate.cpp
+    src/colormap/colormapcolorscale.cpp
+    src/colormap/colormap.cpp
 )
+
+LIST(APPEND INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/src)
 
 if(ANDROID)
   add_library(QtOpenGL_ColorMap SHARED
@@ -66,12 +55,13 @@ else()
   add_executable(QtOpenGL_ColorMap
     main.cpp
     ${SOURCES}
-    #${HEADERS}
-    ${TS_FILES}
+    ${HEADERS}
+    #${TS_FILES}
     ${RESOURCES_FILE}
   )
 endif()
 
+target_include_directories(QtOpenGL_ColorMap PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_libraries(QtOpenGL_ColorMap PRIVATE Qt5::Widgets Qt5::OpenGL)
 
-qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+#qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

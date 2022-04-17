@@ -5,3 +5,4 @@ WindowCenterWidget::WindowCenterWidget(QWidget * parent)
 {
 
 }
+

@@ -1,5 +1,5 @@
-#ifndef CMCOLORSCALE_H
-#define CMCOLORSCALE_H
+#ifndef CM_COLOR_SCALE_H
+#define CM_COLOR_SCALE_H
 
 #include <base/colorscale.h>
 
