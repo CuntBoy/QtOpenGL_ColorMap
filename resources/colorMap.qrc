@@ -2,5 +2,8 @@
     <qresource prefix="/pic">
         <file>images/test_image.JPG</file>
     </qresource>
-    <qresource prefix="/shaders"/>
+    <qresource prefix="/shaders">
+        <file>shaders/vertexShader/gl_image.vert</file>
+        <file>shaders/fragmentshader/gl_image.frag</file>
+    </qresource>
 </RCC>
