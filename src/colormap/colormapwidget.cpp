@@ -26,6 +26,13 @@ void ColorMapWidget::initializeGL()
     makeCurrent();
     initializeOpenGLFunctions();
     // 创建绘制使用的资源
+    m_vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    m_indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+    m_arrayBuffer = new QOpenGLVertexArrayObject;
+
+
+                                       
+
 
     // 打开深度测试
     glEnable(GL_DEPTH_TEST);
