@@ -7,7 +7,7 @@
 
 class ColorScale: public QWidget
 {
-    Q_OBJECT
+    // Q_OBJECT
 public:
     explicit ColorScale(QWidget *parent = nullptr);
     ~ColorScale() override;

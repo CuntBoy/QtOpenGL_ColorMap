@@ -27,10 +27,11 @@ ColorMap::~ColorMap()
 }
 
 // 绘图函数
-void ColorMap::colorMap(const std::shared_ptr<ColorMapData>& data_) const
+void ColorMap::colorMap(const std::shared_ptr<ColorMapData> & data_) const
 {
     // m_colorMapData = data_;
     const auto centerWidget = dynamic_cast<ColorMapWidget*>(m_centerWindow);
+    // m_colorMapData = data_;
     centerWidget->colorMapData(data_);
 }
 
