@@ -28,6 +28,7 @@ protected:
 
     // 生成绘制的数据 
     void generateDrawData();
+    void generateIndexData();
 
 private:
     // 使用STL      -- 三个方向上的数据

@@ -38,6 +38,8 @@ ColorMapData::ColorMapData(const std::vector<float>& x, const std::vector<float>
 
     // 生成绘制数据  - 输出数据和索引 
     generateDrawData();
+    generateIndexData();
+
 }
 
 ColorMapData::~ColorMapData()
@@ -72,7 +74,14 @@ void ColorMapData::generateDrawData()
     // Z中的值 按列存储
     // 按列存取
     // 数据的第一列
-    //
+
+    if(m_xData.size() < 2 || m_yData.size() < 2)
+    {
+        // 生成其他类型的数据 
+        // TODO
+        return;
+    }
+
     m_vertices.reserve(m_xData.size() * m_yData.size() * 7);
     for(int column = 0;column < m_xData.size();column ++)  // NOLINT(clang-diagnostic-sign-compare)
     {
@@ -91,6 +100,29 @@ void ColorMapData::generateDrawData()
             std::copy(pos.cbegin(), pos.cend(), m_vertices.end());
         }
     }
+}
+
+void ColorMapData::generateIndexData()
+{
+    //生成索引数据
+    const int column = static_cast<int>(m_xData.size());
+    const int row = static_cast<int>(m_yData.size());
+
+    for (int i = 0; column - 1 > i; i++)
+    {
+        for (int j = 0; row - 1 > j; j++)
+        {
+            m_indices.push_back(i*j + j);
+            m_indices.push_back((i+1)*j + j);
+            m_indices.push_back((i+1)*(j+1) + j);
+
+            m_indices.push_back(i * j + j);
+            m_indices.push_back((i+1) * (j+1) + j);
+            m_indices.push_back(i * j + j);
+        }
+    }
+
+
 }
 
 void ColorMapData::initialize()

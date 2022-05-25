@@ -11,12 +11,16 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+SET(QRC_SOURCE_FILES resources/colorMap.qrc)
+
 find_package(Qt5 REQUIRED COMPONENTS Widgets OpenGL LinguistTools)
 
-# 语言文件
-set(TS_FILES QtOpenGL_ColorMap_zh_CN.ts)
+qt5_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
 
-SET(RESOURCES_FILE colorMap.qrc)
+# 语言文件
+# set(TS_FILES QtOpenGL_ColorMap_zh_CN.ts)
+
+# SET(RESOURCES_FILE colorMap.qrc)
 
 SET(HEADERS
     src/base/colorscale.h
@@ -45,23 +49,15 @@ SET(SOURCES
 )
 
 LIST(APPEND INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/src)
-
-if(ANDROID)
-  add_library(QtOpenGL_ColorMap SHARED
-    main.cpp
-    ${TS_FILES}
-  )
-else()
-  add_executable(QtOpenGL_ColorMap
+add_executable(QtOpenGL_ColorMap
     main.cpp
     ${SOURCES}
     ${HEADERS}
-    #${TS_FILES}
-    ${RESOURCES_FILE}
-  )
-endif()
+    ${TS_FILES}
+    ${QRC_FILES}
+)
 
 target_include_directories(QtOpenGL_ColorMap PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_libraries(QtOpenGL_ColorMap PRIVATE Qt5::Widgets Qt5::OpenGL)
 
-#qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+# qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
