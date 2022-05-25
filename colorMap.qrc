@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/pic">
-        <file>resource/images/test_image.JPG</file>
-    </qresource>
-    <qresource prefix="/shaders"/>
-</RCC>
