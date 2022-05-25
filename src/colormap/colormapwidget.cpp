@@ -8,7 +8,6 @@
 #include <QOpenGLShaderProgram>
 
 
-
 ColorMapWidget::ColorMapWidget(QWidget* parent)
     : WindowCenterWidget(parent)
     , m_drawData(nullptr)
@@ -25,11 +24,8 @@ void ColorMapWidget::initialize()
 void ColorMapWidget::initializeGL()
 {
     makeCurrent();
-    this->initializeOpenGLFunctions();
-
+    initializeOpenGLFunctions();
     // 创建绘制使用的资源
-
-
 
     // 打开深度测试
     glEnable(GL_DEPTH_TEST);
@@ -39,13 +35,18 @@ void ColorMapWidget::initializeGL()
 void ColorMapWidget::resizeGL(int w, int h)
 {
     glViewport(0, 0, w, h);
+    // glViewport(10, 10, w/2.0, h/2.0);
+    // 设置帧缓冲大小 
+
+
 }
 
 void ColorMapWidget::paintGL()
 {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glClearColor(0.0, 1.0, 0.0, 1.0);
+    glViewport(10, 10, width() / 2.0, height() / 2.0);
+    glClearColor(0.4, 0.3, 0.5, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 }
 

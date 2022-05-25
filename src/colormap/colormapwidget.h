@@ -37,7 +37,11 @@ protected:
 private:
     std::shared_ptr<DrawData>  m_drawData{ nullptr };
     QOpenGLBuffer* m_vertexBuffer{ nullptr };
+    QOpenGLBuffer* m_indexBuffer{ nullptr };
+
     QOpenGLVertexArrayObject* m_arrayBuffer{ nullptr };
+    
+    // shader program
     QOpenGLShaderProgram* m_shaderProgram{ nullptr };
 
     // 在两个线程之间共享
