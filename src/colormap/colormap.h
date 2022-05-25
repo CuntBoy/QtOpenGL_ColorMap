@@ -8,6 +8,7 @@
 #include "colormapdata.h"
 
 // 绘图窗口 -- main Window
+// 创建对应的菜单一起其他的东西 
 
 class ColorMap final : public MainWindow
 {
