@@ -4,6 +4,7 @@
     </qresource>
     <qresource prefix="/shaders">
         <file>shaders/vertexShader/gl_image.vert</file>
+        <file>shaders/vertexShader/gl_image_ualpha.vert</file>
         <file>shaders/fragmentshader/gl_image.frag</file>
     </qresource>
 </RCC>
