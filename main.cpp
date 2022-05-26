@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     ColorMap widget;
-
+    widget.setWindowTitle("Color Map Widget");
     const std::shared_ptr<ColorMapData> data(new ColorMapData());
     
     widget.colorMap(data);

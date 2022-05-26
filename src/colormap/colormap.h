@@ -14,7 +14,7 @@ class ColorMap final : public MainWindow
 {
     Q_OBJECT
 public:
-    explicit ColorMap(QWidget * parent_ = nullptr);
+    explicit ColorMap(QWidget* parent_ = nullptr);
     ~ColorMap() override;
 
     ColorMap(const ColorMap&) = delete;
@@ -28,7 +28,7 @@ public:
 
 private:
     std::shared_ptr<ColorMapData> m_colorMapData;      // 绘图的数据
-    CMColorScale * m_colorScale;   // ColorScale
+    CMColorScale* m_colorScale;   // ColorScale
 
 signals:
 

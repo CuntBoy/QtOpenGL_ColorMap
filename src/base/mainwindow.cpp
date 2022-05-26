@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget* parent)
     , m_editMenu(nullptr)
 {
     resize(QSize(640, 480));
-    setWindowTitle("ColorMap Window");
+    // setWindowTitle("ColorMap Window");
 
     MainWindow::initMenuBar();  // 添加菜单
 }

@@ -9,9 +9,9 @@
 class CMColorScale final : public ColorScale
 {
 public:
-    CMColorScale(QWidget * parent = nullptr);
+    CMColorScale(QWidget* parent = nullptr);
     ~CMColorScale() override;
-    
+
 
 
 };

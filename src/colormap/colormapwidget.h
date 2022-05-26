@@ -4,6 +4,7 @@
 #include <base/windowcenterwidget.h>
 #include <QWidget>
 #include <base/drawdata.h>
+#include <QMatrix4x4>
 
 // color map center widget
 
@@ -38,15 +39,18 @@ private:
     std::shared_ptr<DrawData>  m_drawData{ nullptr };
     QOpenGLBuffer* m_vertexBuffer{ nullptr };
     QOpenGLBuffer* m_indexBuffer{ nullptr };
-
     QOpenGLVertexArrayObject* m_arrayBuffer{ nullptr };
-    
+
     // shader program
     QOpenGLShaderProgram* m_shaderProgram{ nullptr };
 
     // 在两个线程之间共享
-    QOpenGLTexture* m_texture{nullptr};  // 保存离屏渲染的结果 
+    QOpenGLTexture* m_texture{ nullptr };  // 保存离屏渲染的结果 
 
+    //变换矩阵
+    QMatrix4x4 m_model;
+    QMatrix4x4 m_view;
+    QMatrix4x4 m_projection;
 
 
 };

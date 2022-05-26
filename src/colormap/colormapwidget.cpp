@@ -11,13 +11,20 @@
 ColorMapWidget::ColorMapWidget(QWidget* parent)
     : WindowCenterWidget(parent)
     , m_drawData(nullptr)
-
+    , m_vertexBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
+    , m_indexBuffer(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
+    , m_arrayBuffer(new QOpenGLVertexArrayObject())
+    , m_shaderProgram(new QOpenGLShaderProgram)
+    , m_texture(new QOpenGLTexture(QOpenGLTexture::Target2D)) // 2D 纹理 
 {
-    // initialize();
+    initialize();
 }
 
 void ColorMapWidget::initialize()
 {
+    m_model.setToIdentity();
+    m_view.setToIdentity();
+    m_projection.setToIdentity();
 
 }
 
@@ -26,12 +33,13 @@ void ColorMapWidget::initializeGL()
     makeCurrent();
     initializeOpenGLFunctions();
     // 创建绘制使用的资源
-    m_vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    m_indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
-    m_arrayBuffer = new QOpenGLVertexArrayObject;
+    // m_vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    // m_indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+    // m_arrayBuffer = new QOpenGLVertexArrayObject;
 
-
-                                       
+    m_vertexBuffer->create();
+    m_indexBuffer->create();
+    m_arrayBuffer->create();
 
 
     // 打开深度测试
@@ -42,7 +50,6 @@ void ColorMapWidget::initializeGL()
 void ColorMapWidget::resizeGL(int w, int h)
 {
     glViewport(0, 0, w, h);
-    // glViewport(10, 10, w/2.0, h/2.0);
     // 设置帧缓冲大小 
 
 
@@ -50,10 +57,9 @@ void ColorMapWidget::resizeGL(int w, int h)
 
 void ColorMapWidget::paintGL()
 {
-    glViewport(10, 10, width() / 2.0, height() / 2.0);
-    glClearColor(0.4, 0.3, 0.5, 1.0);
+    // glViewport(10, 10, width() / 2.0, height() / 2.0);
+    glClearColor(0.4f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 }
 
