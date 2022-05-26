@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(QtOpenGL_ColorMap LANGUAGES CXX)
+SET(ProjectName ColorMap)
+
+project(${ProjectName} LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -19,8 +21,6 @@ qt5_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
 
 # 语言文件
 # set(TS_FILES QtOpenGL_ColorMap_zh_CN.ts)
-
-# SET(RESOURCES_FILE colorMap.qrc)
 
 SET(HEADERS
     src/base/colorscale.h
@@ -49,7 +49,7 @@ SET(SOURCES
 )
 
 LIST(APPEND INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/src)
-add_executable(QtOpenGL_ColorMap
+add_executable(${ProjectName}
     main.cpp
     ${SOURCES}
     ${HEADERS}
@@ -57,7 +57,7 @@ add_executable(QtOpenGL_ColorMap
     ${QRC_FILES}
 )
 
-target_include_directories(QtOpenGL_ColorMap PRIVATE ${INCLUDE_DIRECTORIES})
-target_link_libraries(QtOpenGL_ColorMap PRIVATE Qt5::Widgets Qt5::OpenGL)
+target_include_directories(${ProjectName} PRIVATE ${INCLUDE_DIRECTORIES})
+target_link_libraries(${ProjectName} PRIVATE Qt5::Widgets Qt5::OpenGL)
 
 # qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
