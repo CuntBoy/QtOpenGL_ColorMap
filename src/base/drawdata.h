@@ -1,8 +1,7 @@
 #ifndef DRAW_DATA_H
 #define DRAW_DATA_H
 
-// 数据类 -- 存储并组织了所有的数据
-// 绘图的时候只需要将此数据类的指针 共享给显示图像的窗口
+// draw data class  -- save and layout data
 
 #include <iostream>
 #include <vector>

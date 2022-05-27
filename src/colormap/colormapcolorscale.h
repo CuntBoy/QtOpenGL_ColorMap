@@ -3,8 +3,8 @@
 
 #include <base/colorscale.h>
 
-// 用于绘制 Color Scale
-// TODO 将此窗口 悬浮在RenderWidget上
+// draw Color Scale
+// TODO make it  hover on RenderWidget
 
 class CMColorScale final : public ColorScale
 {

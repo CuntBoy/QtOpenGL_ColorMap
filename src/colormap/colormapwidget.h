@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <base/drawdata.h>
 #include <QMatrix4x4>
+#include <array>
 
 // color map center widget
 
@@ -13,13 +14,17 @@ class QOpenGLVertexArrayObject;
 class QOpenGLTexture;
 class QOpenGLShaderProgram;
 
+namespace TESTSpace
+{
+
+};
+
 
 class ColorMapWidget final : public WindowCenterWidget
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
     explicit ColorMapWidget(QWidget* parent = nullptr);
-
     ColorMapWidget(const ColorMapWidget&) = delete;
     ColorMapWidget(const ColorMapWidget&&) = delete;
     ColorMapWidget& operator=(const ColorMapWidget&) = delete;
@@ -30,13 +35,15 @@ public:
     ~ColorMapWidget() override;
 
 protected:
-    void initialize();   // 初始化
+    void initialize();   // initizlize
     void initializeGL() override;
-    void resizeGL(int w, int h) override;
     void paintGL() override;
+    void resizeGL(int w, int h) override;
 
 private:
-    std::shared_ptr<DrawData>  m_drawData{ nullptr };
+    std::weak_ptr<DrawData>  m_drawData;
+
+    // render buffer
     QOpenGLBuffer* m_vertexBuffer{ nullptr };
     QOpenGLBuffer* m_indexBuffer{ nullptr };
     QOpenGLVertexArrayObject* m_arrayBuffer{ nullptr };
@@ -44,14 +51,15 @@ private:
     // shader program
     QOpenGLShaderProgram* m_shaderProgram{ nullptr };
 
-    // 在两个线程之间共享
-    QOpenGLTexture* m_texture{ nullptr };  // 保存离屏渲染的结果 
+    // shared with two thread
+    QOpenGLTexture* m_texture{ nullptr };  // save off screen result
 
-    //变换矩阵
+    // transform matrix
     QMatrix4x4 m_model;
     QMatrix4x4 m_view;
     QMatrix4x4 m_projection;
 
+    std::shared_ptr<std::array<float,42>> m_testData;
 
 };
 

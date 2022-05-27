@@ -4,7 +4,6 @@
 
 ColorMap::ColorMap(QWidget* parent_)
     : MainWindow(parent_)
-    , m_colorMapData(nullptr)
     , m_colorScale(new CMColorScale)
 {
     m_centerWindow = new ColorMapWidget(this);  // 创建绘图窗口
@@ -13,7 +12,7 @@ ColorMap::ColorMap(QWidget* parent_)
 
     // 设置最小的宽高
     m_centerWindow->setMinimumSize(640, 480);
-    m_centerWindow->resize(640, 480);
+
 }
 
 ColorMap::~ColorMap()                    
@@ -29,9 +28,9 @@ ColorMap::~ColorMap()
 // 绘图函数
 void ColorMap::colorMap(const std::shared_ptr<ColorMapData> & data_) const
 {
-    // m_colorMapData = data_;
+    m_colorMapData = data_;
     const auto centerWidget = dynamic_cast<ColorMapWidget*>(m_centerWindow);
-    // m_colorMapData = data_;
     centerWidget->colorMapData(data_);
+
 }
 
