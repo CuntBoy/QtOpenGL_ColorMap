@@ -1,5 +1,5 @@
 # Color Map
-- draw color map use OpenGL(`VAO VBO EBO`)
+- draw color map use OpenGL
 
 <p style="color:red">一个使用Qt+OpenGL的绘图库</p> 
 
@@ -42,6 +42,8 @@ _展示均匀数据与非均匀数据_
   	```
 
 	- 上一步的运行结果，会生成`VS`的工程，使用`VS`打开，编译运行就行
+
+- use VS Open Cmake Project
 
 - 直接使用`QtCreator`打开
 
