@@ -22,7 +22,7 @@ namespace TESTSpace
 
 class ColorMapWidget final : public WindowCenterWidget
 {
-//    Q_OBJECT
+    //    Q_OBJECT
 public:
     explicit ColorMapWidget(QWidget* parent = nullptr);
     ColorMapWidget(const ColorMapWidget&) = delete;
@@ -34,19 +34,17 @@ public:
 
     ~ColorMapWidget() override;
 
-protected:
-    void initialize();   // initizlize
-    void initializeGL() override;
-    void paintGL() override;
-    void resizeGL(int w, int h) override;
-
 private:
     std::weak_ptr<DrawData>  m_drawData;
 
     // render buffer
-    QOpenGLBuffer* m_vertexBuffer{ nullptr };
-    QOpenGLBuffer* m_indexBuffer{ nullptr };
-    QOpenGLVertexArrayObject* m_arrayBuffer{ nullptr };
+    QOpenGLBuffer* m_imageVertexBuffer{ nullptr };
+    QOpenGLBuffer* m_imageIndexBuffer{ nullptr };
+    QOpenGLVertexArrayObject* m_imageArrayBuffer{ nullptr };
+
+    QOpenGLBuffer* m_axesVertexBuffer{ nullptr };
+    QOpenGLBuffer* m_axesIndexBuffer{ nullptr };
+    QOpenGLVertexArrayObject* m_axesArrayBuffer{ nullptr };
 
     // shader program
     QOpenGLShaderProgram* m_imageShaderProgram{ nullptr };
@@ -60,10 +58,23 @@ private:
     QMatrix4x4 m_view;
     QMatrix4x4 m_projection;
 
-    std::shared_ptr<std::array<float,42>> m_testData;
+    std::shared_ptr<std::array<float, 42>> m_testData;
 
+protected:
+    void initialize();   // initialize
+    void initializeGL() override;
+    void paintGL() override;
+    void resizeGL(int w, int h) override;
+
+private:
+    void initGlImageResource();
+    void initGlAxesResource();
+
+    void drawImage();
+    void drawAxes();
+    void drawRect() const;
 };
 
 
 
-#endif // COLORMAPWIDGET_H
+#endif // COLOR_MAP_WIDGET_H

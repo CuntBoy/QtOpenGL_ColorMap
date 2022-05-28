@@ -1,7 +1,6 @@
 #ifndef COLOR_MAP_H
 #define COLOR_MAP_H
 
-#include <base/drawdata.h>
 #include <base/mainwindow.h>
 #include <colormap/colormapcolorscale.h>
 
@@ -23,17 +22,14 @@ public:
     ColorMap& operator=(const ColorMap&) = delete;
     ColorMap& operator=(const ColorMap&&) = delete;
 
-    void colorMap(const std::shared_ptr<ColorMapData> & data_) const;  // the API of render   -- call before widget show
+    void colorMap(const std::shared_ptr<ColorMapData>& data_) const; // the API of render   -- call before widget show
 
 private:
-    mutable std::weak_ptr<ColorMapData> m_colorMapData{};      // draw data
-    CMColorScale* m_colorScale;                                // ColorScale
+    mutable std::weak_ptr<ColorMapData> m_colorMapData{}; // draw data
+    CMColorScale* m_colorScale; // ColorScale
 
-//signals:
-
-
+    //signals:
 };
-
 
 
 #endif // COLORMAP_H
