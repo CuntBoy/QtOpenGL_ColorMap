@@ -49,7 +49,8 @@ private:
     QOpenGLVertexArrayObject* m_arrayBuffer{ nullptr };
 
     // shader program
-    QOpenGLShaderProgram* m_shaderProgram{ nullptr };
+    QOpenGLShaderProgram* m_imageShaderProgram{ nullptr };
+    QOpenGLShaderProgram* m_axesLineShaderProgram{ nullptr };
 
     // shared with two thread
     QOpenGLTexture* m_texture{ nullptr };  // save off screen result

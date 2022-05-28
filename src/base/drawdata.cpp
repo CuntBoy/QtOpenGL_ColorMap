@@ -103,7 +103,6 @@ void DrawData::calculateBoundary(const std::vector<float>& input, std::vector<fl
 
 void DrawData::showData(const double *data, const int len)
 {
-    
     for(auto i = 0;i < len;i++)
     {
         qDebug()<<data[i]<< Qt::endl;

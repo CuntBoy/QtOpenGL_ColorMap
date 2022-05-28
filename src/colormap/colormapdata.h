@@ -7,7 +7,6 @@
 
 class ColorMapData : public DrawData
 {
-
 public:
     ColorMapData();
 

@@ -18,12 +18,17 @@ std::array<float,42> vertices {
         -1.0,1.0,0.0,0.0,0.0,0.0,0.0
     };
 
+// draw axes line data
+std::array<float,42> lines_vertices {};
+
+
 ColorMapWidget::ColorMapWidget(QWidget* parent)
     : WindowCenterWidget(parent)
     , m_vertexBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
     , m_indexBuffer(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
     , m_arrayBuffer(new QOpenGLVertexArrayObject())
-    , m_shaderProgram(new QOpenGLShaderProgram)
+    , m_imageShaderProgram(new QOpenGLShaderProgram)
+    , m_axesLineShaderProgram(new QOpenGLShaderProgram)
     , m_texture(new QOpenGLTexture(QOpenGLTexture::Target2D)) // 2D 纹理
     , m_testData(std::make_shared<std::array<float,42>>(vertices))    // 创建多个窗口的时候会报错 TODO
 {
@@ -64,15 +69,20 @@ void ColorMapWidget::initializeGL()
     m_arrayBuffer->release();
 
     // create shader program
-    m_shaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Vertex,":shaders/shaders/vertexShader/gl_image.vert");
-    m_shaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,":shaders/shaders/fragmentshader/gl_image.frag");
+    m_imageShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Vertex,":shaders/shaders/vertexShader/gl_image.vert");
+    m_imageShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,":shaders/shaders/fragmentshader/gl_image.frag");
 
-    const auto result = m_shaderProgram->link();
+#if DEBUG_
+    const auto result = m_imageShaderProgram->link();
     if(!result)
     {
-        cout << m_shaderProgram->log().toStdString() << endl;
+        cout << m_imageShaderProgram->log().toStdString() << endl;
     }
     cout<<"link success!"<<endl;
+#else
+    m_imageShaderProgram->link();
+#endif
+
 
     // depth test
     glEnable(GL_DEPTH_TEST);
@@ -81,14 +91,18 @@ void ColorMapWidget::initializeGL()
 
 void ColorMapWidget::paintGL()
 {
-    // glViewport(10, 10, width() / 2.0, height() / 2.0);
-    glClearColor(0.4f, 0.3f, 0.5f, 1.0f);
+    // do calcute viewport
+    glViewport(width() / 4.0, height()/4.0, width() / 2.0, height() / 2.0);
+
+    //    glClearColor(0.4f, 0.3f, 0.5f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    m_shaderProgram->bind();
+
+    m_imageShaderProgram->bind();
     m_arrayBuffer->bind();
-    m_shaderProgram->setUniformValue("model",m_model);
-    m_shaderProgram->setUniformValue("view",m_view);
-    m_shaderProgram->setUniformValue("projection",m_projection);
+    m_imageShaderProgram->setUniformValue("model",m_model);
+    m_imageShaderProgram->setUniformValue("view",m_view);
+    m_imageShaderProgram->setUniformValue("projection",m_projection);
     glDrawArrays(GL_TRIANGLES,0,6);
 
 }
@@ -123,10 +137,10 @@ ColorMapWidget::~ColorMapWidget()
         m_arrayBuffer = nullptr;
     }
 
-    if (m_shaderProgram)
+    if (m_imageShaderProgram)
     {
-        delete m_shaderProgram;
-        m_shaderProgram = nullptr;
+        delete m_imageShaderProgram;
+        m_imageShaderProgram = nullptr;
     }
 
     if (m_texture)

@@ -19,7 +19,8 @@ ColorMapData::ColorMapData(const int length_x, const int length_y, const double*
     Q_UNUSED(data_)
 }
 
-ColorMapData::ColorMapData(const std::vector<float>& x, const std::vector<float>& y, const std::vector<float>& z):DrawData()
+ColorMapData::ColorMapData(const std::vector<float>& x, const std::vector<float>& y, const std::vector<float>& z)
+    : DrawData()
     , m_inputXData(0)
     , m_inputYData(0)
     , m_inputZData(0)
