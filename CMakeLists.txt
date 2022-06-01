@@ -33,6 +33,7 @@ SET(HEADERS
     src/colormap/colormapcoordinate.h
     src/colormap/colormapcolorscale.h
     src/colormap/colormap.h
+    src/colormap/RenderThread.h
 )
 
 SET(SOURCES
@@ -41,11 +42,14 @@ SET(SOURCES
     src/base/drawdata.cpp
     src/base/mainwindow.cpp
     src/base/windowcenterwidget.cpp
+    
     src/colormap/colormapwidget.cpp
     src/colormap/colormapdata.cpp
     src/colormap/colormapcoordinate.cpp
     src/colormap/colormapcolorscale.cpp
     src/colormap/colormap.cpp
+    src/colormap/RenderThread.cpp
+    
 )
 
 LIST(APPEND INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/src)
