@@ -6,6 +6,10 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLContext>
+#include <QOffscreenSurface>
+#include <memory>
+#include "RenderThread.h"
 
 // test data
 std::array<float, 42> vertices{
@@ -62,8 +66,9 @@ void ColorMapWidget::initializeGL()
     using std::endl;
 
     makeCurrent();
-    initializeOpenGLFunctions();
+    initRenderThread();
 
+    initializeOpenGLFunctions();
     initGlImageResource();
     initGlAxesResource();
 
@@ -242,4 +247,27 @@ ColorMapWidget::~ColorMapWidget()
     }
 
     doneCurrent();
+}
+
+void ColorMapWidget::initRenderThread()
+{
+    auto context = QOpenGLContext::currentContext();
+    const auto mainSurface = context->surface();
+
+    // 创建离屏渲染使用的 - 渲染设备
+    auto renderSurface = std::make_shared<QOffscreenSurface>(nullptr,this);
+    renderSurface->setFormat(mainSurface->format());
+    renderSurface->create();
+
+    // 解绑当前绑定到当前线程的渲染的上下文
+    context->doneCurrent();
+    m_renderThread = std::make_unique<RenderThread>(renderSurface,context,this);
+    context->makeCurrent(mainSurface);
+
+    connect(m_renderThread.get(),&RenderThread::imageReady,this,[this](){
+        update();
+    },Qt::QueuedConnection);
+
+    m_renderThread->start();
+
 }

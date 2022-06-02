@@ -13,16 +13,18 @@ class QOpenGLBuffer;
 class QOpenGLVertexArrayObject;
 class QOpenGLTexture;
 class QOpenGLShaderProgram;
+class RenderThread;
 
 namespace TESTSpace
 {
 
 };
 
+using std::unique_ptr;
 
 class ColorMapWidget final : public WindowCenterWidget
 {
-    //    Q_OBJECT
+    Q_OBJECT
 public:
     explicit ColorMapWidget(QWidget* parent = nullptr);
     ColorMapWidget(const ColorMapWidget&) = delete;
@@ -60,6 +62,8 @@ private:
 
     std::shared_ptr<std::array<float, 42>> m_testData;
 
+    std::unique_ptr<RenderThread> m_renderThread{nullptr};
+
 protected:
     void initialize();   // initialize
     void initializeGL() override;
@@ -73,6 +77,12 @@ private:
     void drawImage();
     void drawAxes();
     void drawRect() const;
+
+    // TODO
+    //  äÖÈ¾ÎÄ×Ö
+
+    void initRenderThread();
+
 };
 
 
