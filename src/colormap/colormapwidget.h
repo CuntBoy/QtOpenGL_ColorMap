@@ -73,6 +73,7 @@ protected:
 private:
     void initGlImageResource();
     void initGlAxesResource();
+    void initGlFontResource();
 
     void drawImage();
     void drawAxes();
@@ -80,6 +81,7 @@ private:
 
     // TODO
     //  Джх╬ндвж
+    void drawFont();
 
     void initRenderThread();
 

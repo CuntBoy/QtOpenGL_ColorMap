@@ -10,6 +10,9 @@
 #include <QOffscreenSurface>
 #include <memory>
 #include "RenderThread.h"
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
 
 // test data
 std::array<float, 42> vertices{
@@ -66,11 +69,12 @@ void ColorMapWidget::initializeGL()
     using std::endl;
 
     makeCurrent();
+    initializeOpenGLFunctions();
     initRenderThread();
 
-    initializeOpenGLFunctions();
     initGlImageResource();
     initGlAxesResource();
+    initGlFontResource();
 
     // depth test
     glEnable(GL_DEPTH_TEST);
@@ -271,3 +275,41 @@ void ColorMapWidget::initRenderThread()
     m_renderThread->start();
 
 }
+
+// 初始化字体的文件
+void ColorMapWidget::initGlFontResource()
+{
+    using std::cout;
+    using std::endl;
+
+    FT_Library  ft;
+    if(FT_Init_FreeType(&ft))  // 初始化FreeType库
+    {
+        cout<<"ERROR::FREETYPE: Could not init FreeType Library"<<endl;
+    }
+
+    FT_Face face;  // 将这个字体加载为一个FreeType称之为面(Face)
+    if(FT_New_Face(ft,"./../resources/Fonts/arial.ttf",0,&face))
+    {
+        cout<<"ERROR::FREETYPE: Failed to load font"<<endl;
+    }
+    // 当面加载完成之后，我们需要定义字体大小，这表示着我们要从字体面中生成多大的字形：
+    // 将宽度值设为0表示我们要从字体面通过给定的高度中动态计算出字形的宽度
+    FT_Set_Pixel_Sizes(face,0,48);
+
+    // 激活一个字形
+    // 将FT_LOAD_RENDER设为加载标记之一，我们告诉FreeType去创建一个8位的灰度位图，我们可以通过face->glyph->bitmap来访问
+    if(FT_Load_Char(face,'X',FT_LOAD_RENDER))
+    {
+        cout<<"ERROR::FREETYPE: Failed to load Glyph"<<endl;
+    }
+
+
+
+}
+
+void ColorMapWidget::drawFont()
+{
+
+}
+

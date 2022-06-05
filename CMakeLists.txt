@@ -15,6 +15,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 SET(QRC_SOURCE_FILES resources/colorMap.qrc)
 
+# 三方库目录
+SET(INC_DIR  ${CMAKE_SOURCE_DIR}/liberaries/freetype/include)
+SET(LINK_DIR ${CMAKE_SOURCE_DIR}/liberaries/freetype/lib)
+message (STATUS " INC_DIR " ${INC_DIR})
+message (STATUS " LINK_DIR " ${LINK_DIR})
+include_directories(${INC_DIR})
+link_directories(${LINK_DIR})
+
+# find_package(freetype REQUIRED COMPONENTS freetype)
+#if(freetype_FOUND)
+#    message ("freetype found")
+#    message (STATUS " ==> " ${freetype_DIR})
+#else()
+#    message (FATAL_ERROR "Cannot find freetype")
+#endif()
+
 find_package(Qt5 REQUIRED COMPONENTS Widgets OpenGL LinguistTools)
 
 qt5_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
@@ -53,6 +69,8 @@ SET(SOURCES
 )
 
 LIST(APPEND INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/src)
+LIST(APPEND INCLUDE_DIRECTORIES ${INC_DIR})
+
 add_executable(${ProjectName}
     main.cpp
     ${SOURCES}
@@ -62,6 +80,6 @@ add_executable(${ProjectName}
 )
 
 target_include_directories(${ProjectName} PRIVATE ${INCLUDE_DIRECTORIES})
-target_link_libraries(${ProjectName} PRIVATE Qt5::Widgets Qt5::OpenGL)
+target_link_libraries(${ProjectName} PRIVATE Qt5::Widgets Qt5::OpenGL freetype)
 
 # qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
