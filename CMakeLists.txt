@@ -16,8 +16,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(QRC_SOURCE_FILES resources/colorMap.qrc)
 
 # 三方库目录
-SET(INC_DIR  ${CMAKE_SOURCE_DIR}/liberaries/freetype/include)
-SET(LINK_DIR ${CMAKE_SOURCE_DIR}/liberaries/freetype/lib)
+SET(INC_DIR  ${CMAKE_SOURCE_DIR}/liberaries/include)
+SET(LINK_DIR ${CMAKE_SOURCE_DIR}/liberaries/lib)
 message (STATUS " INC_DIR " ${INC_DIR})
 message (STATUS " LINK_DIR " ${LINK_DIR})
 include_directories(${INC_DIR})
@@ -50,6 +50,7 @@ SET(HEADERS
     src/colormap/colormapcolorscale.h
     src/colormap/colormap.h
     src/colormap/RenderThread.h
+    src/base/glfont.h
 )
 
 SET(SOURCES
@@ -65,6 +66,8 @@ SET(SOURCES
     src/colormap/colormapcolorscale.cpp
     src/colormap/colormap.cpp
     src/colormap/RenderThread.cpp
+    src/base/character.h  # 字符文件
+    src/base/glfont.cpp 
     
 )
 
@@ -77,7 +80,7 @@ add_executable(${ProjectName}
     ${HEADERS}
     ${TS_FILES}
     ${QRC_FILES}
-)
+ )
 
 target_include_directories(${ProjectName} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_libraries(${ProjectName} PRIVATE Qt5::Widgets Qt5::OpenGL freetype)

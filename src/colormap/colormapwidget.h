@@ -48,9 +48,14 @@ private:
     QOpenGLBuffer* m_axesIndexBuffer{ nullptr };
     QOpenGLVertexArrayObject* m_axesArrayBuffer{ nullptr };
 
+    QOpenGLBuffer* m_fontVertexBuffer{ nullptr };
+    QOpenGLBuffer* m_fontIndexBuffer{ nullptr };
+    QOpenGLVertexArrayObject* m_fontArrayBuffer{ nullptr };
+
     // shader program
     QOpenGLShaderProgram* m_imageShaderProgram{ nullptr };
     QOpenGLShaderProgram* m_axesLineShaderProgram{ nullptr };
+    QOpenGLShaderProgram * m_fontShaderProgram{nullptr};
 
     // shared with two thread
     QOpenGLTexture* m_texture{ nullptr };  // save off screen result
@@ -74,16 +79,14 @@ private:
     void initGlImageResource();
     void initGlAxesResource();
     void initGlFontResource();
+    void initRenderThread();
 
     void drawImage();
     void drawAxes();
     void drawRect() const;
-
     // TODO
     //  äÖÈ¾ÎÄ×Ö
     void drawFont();
-
-    void initRenderThread();
 
 };
 
