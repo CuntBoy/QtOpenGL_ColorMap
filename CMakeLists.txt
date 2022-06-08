@@ -10,7 +10,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 SET(QRC_SOURCE_FILES resources/colorMap.qrc)
@@ -68,6 +68,7 @@ SET(SOURCES
     src/colormap/RenderThread.cpp
     src/base/character.h  # 字符文件
     src/base/glfont.cpp 
+    src/base/character.cpp
     
 )
 
@@ -80,7 +81,7 @@ add_executable(${ProjectName}
     ${HEADERS}
     ${TS_FILES}
     ${QRC_FILES}
- )
+  )
 
 target_include_directories(${ProjectName} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_libraries(${ProjectName} PRIVATE Qt5::Widgets Qt5::OpenGL freetype)
