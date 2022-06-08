@@ -11,6 +11,7 @@
 #include <memory>
 #include "base/character.h"
 #include "RenderThread.h"
+#include "base/character.h"
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
@@ -49,9 +50,6 @@ ColorMapWidget::ColorMapWidget(QWidget* parent)
     , m_axesVertexBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
     , m_axesIndexBuffer(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
     , m_axesArrayBuffer(new QOpenGLVertexArrayObject)
-    , m_fontVertexBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
-    , m_fontIndexBuffer(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
-    , m_fontArrayBuffer(new QOpenGLVertexArrayObject)
     , m_imageShaderProgram(new QOpenGLShaderProgram)
     , m_axesLineShaderProgram(new QOpenGLShaderProgram)
     , m_fontShaderProgram(new QOpenGLShaderProgram)
@@ -66,6 +64,7 @@ void ColorMapWidget::initialize()
     m_model.setToIdentity();
     m_view.setToIdentity();
     m_projection.setToIdentity();
+    m_words.clear();
 }
 
 void ColorMapWidget::initializeGL()
@@ -81,6 +80,23 @@ void ColorMapWidget::initializeGL()
     initGlAxesResource();
     initGlFontResource();
 
+    // 创建字体
+#if 1
+    m_words.resize(10);
+    const auto font = std::make_shared<GlFont>();
+    const auto context = QOpenGLContext::currentContext();
+    font->setString("hello");
+    font->createResources(*context);
+    m_words.push_back(font);
+#endif
+
+#if 0
+    m_word = std::make_unique<GlFont>();
+    const auto context = QOpenGLContext::currentContext();
+    m_word->setString("hello");
+    m_word->createResources(*context);
+#endif 
+
     // depth test
     glEnable(GL_DEPTH_TEST);
 }
@@ -93,6 +109,7 @@ void ColorMapWidget::paintGL()
 
     drawImage();
     drawAxes();
+    drawFont();
 
     // draw 选框
     drawRect();
@@ -308,6 +325,7 @@ void ColorMapWidget::initGlFontResource()
 
     // 生成 128个字符 保存Character对象到map中
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    auto& charactermanager = CharacterManager::getSingleton();
     for (GLubyte c = 0; c < 128; c++)
     {
         // 加载字形
@@ -340,7 +358,6 @@ void ColorMapWidget::initGlFontResource()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
         // 储存字符供之后使用
-        extern std::map<GLchar, Character> m_characters;
         Character character = {
             texture,
             glm::ivec2(width, height),
@@ -348,15 +365,40 @@ void ColorMapWidget::initGlFontResource()
             static_cast<GLuint>(face->glyph->advance.x)
 
         };
-
-        m_characters.insert(std::pair<GLchar, Character>(c, character));
+        charactermanager.insertCharacter(c, character);
     }
 
     // 清空FreeType资源
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
+
+
+    m_fontShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Vertex,
+        ":shaders/shaders/vertexShader/gl_draw_font.vert");
+
+    m_fontShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,
+        ":shaders/shaders/fragmentshader/gl_draw_font.frag");
+#if _DEBUG   // debug 下输出信息 
+    const auto result = m_fontShaderProgram->link();
+    if (!result)
+    {
+        cout << m_fontShaderProgram->log().toStdString() << endl;
+    }
+    cout << "link success!" << endl;
+#else
+    m_imageShaderProgram->link();
+#endif
+
 }
 
-void ColorMapWidget::drawFont()
+void ColorMapWidget::drawFont() const
 {
+#if 1
+    for(const auto & ptr: m_words)
+    {
+        ptr->draw(*QOpenGLContext::currentContext(), *m_fontShaderProgram);
+    }
+#endif 
+    // m_word->draw(*QOpenGLContext::currentContext(), *m_fontShaderProgram);
+
 }

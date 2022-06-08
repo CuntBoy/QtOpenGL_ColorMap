@@ -4,6 +4,7 @@
 #include <base/windowcenterwidget.h>
 #include <QWidget>
 #include <base/drawdata.h>
+#include <base/glfont.h>
 #include <QMatrix4x4>
 #include <array>
 
@@ -48,10 +49,6 @@ private:
     QOpenGLBuffer* m_axesIndexBuffer{ nullptr };
     QOpenGLVertexArrayObject* m_axesArrayBuffer{ nullptr };
 
-    QOpenGLBuffer* m_fontVertexBuffer{ nullptr };
-    QOpenGLBuffer* m_fontIndexBuffer{ nullptr };
-    QOpenGLVertexArrayObject* m_fontArrayBuffer{ nullptr };
-
     // shader program
     QOpenGLShaderProgram* m_imageShaderProgram{ nullptr };
     QOpenGLShaderProgram* m_axesLineShaderProgram{ nullptr };
@@ -66,8 +63,10 @@ private:
     QMatrix4x4 m_projection;
 
     std::shared_ptr<std::array<float, 42>> m_testData;
-
     std::unique_ptr<RenderThread> m_renderThread{nullptr};
+    std::vector<std::shared_ptr<GlFont> > m_words;
+    // std::unique_ptr<GlFont> m_word;
+
 
 protected:
     void initialize();   // initialize
@@ -86,7 +85,7 @@ private:
     void drawRect() const;
     // TODO
     //  äÖÈ¾ÎÄ×Ö
-    void drawFont();
+    void drawFont() const;
 
 };
 
