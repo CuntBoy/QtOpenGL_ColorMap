@@ -81,21 +81,16 @@ void ColorMapWidget::initializeGL()
     initGlFontResource();
 
     // 创建字体
-#if 1
-    m_words.resize(10);
+#ifdef TEST_FONT
+
+    m_words.clear();
     const auto font = std::make_shared<GlFont>();
     const auto context = QOpenGLContext::currentContext();
     font->setString("hello");
     font->createResources(*context);
     m_words.push_back(font);
-#endif
 
-#if 0
-    m_word = std::make_unique<GlFont>();
-    const auto context = QOpenGLContext::currentContext();
-    m_word->setString("hello");
-    m_word->createResources(*context);
-#endif 
+#endif
 
     // depth test
     glEnable(GL_DEPTH_TEST);
@@ -149,15 +144,19 @@ void ColorMapWidget::initGlImageResource()
     m_imageShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,
         ":shaders/shaders/fragmentshader/gl_image.frag");
 
-#if _DEBUG   // debug 下输出信息 
+#if _DEBUG   // debug 下输出信息
+
     const auto result = m_imageShaderProgram->link();
     if (!result)
     {
         cout << m_imageShaderProgram->log().toStdString() << endl;
     }
     cout << "link success!" << endl;
+
 #else
+
     m_imageShaderProgram->link();
+
 #endif
 }
 
@@ -185,15 +184,20 @@ void ColorMapWidget::initGlAxesResource()
 
     m_axesLineShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,
         ":shaders/shaders/fragmentshader/gl_axes_line.frag");
+
 #if _DEBUG   // debug 下输出信息 
+
     const auto result = m_axesLineShaderProgram->link();
     if (!result)
     {
         cout << m_axesLineShaderProgram->log().toStdString() << endl;
     }
     cout << "link success!" << endl;
+
 #else
+
     m_imageShaderProgram->link();
+
 #endif
 }
 
@@ -378,27 +382,32 @@ void ColorMapWidget::initGlFontResource()
 
     m_fontShaderProgram->addCacheableShaderFromSourceFile(QOpenGLShader::Fragment,
         ":shaders/shaders/fragmentshader/gl_draw_font.frag");
-#if _DEBUG   // debug 下输出信息 
+
+#if _DEBUG   // debug 下输出信息
+
     const auto result = m_fontShaderProgram->link();
     if (!result)
     {
         cout << m_fontShaderProgram->log().toStdString() << endl;
     }
     cout << "link success!" << endl;
+
 #else
+
     m_imageShaderProgram->link();
+
 #endif
 
 }
 
 void ColorMapWidget::drawFont() const
 {
-#if 1
     for(const auto & ptr: m_words)
     {
+        if (!ptr)
+            break;
+
         ptr->draw(*QOpenGLContext::currentContext(), *m_fontShaderProgram);
     }
-#endif 
-    // m_word->draw(*QOpenGLContext::currentContext(), *m_fontShaderProgram);
 
 }

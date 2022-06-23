@@ -16,6 +16,9 @@ class QOpenGLTexture;
 class QOpenGLShaderProgram;
 class RenderThread;
 
+
+#define TEST_FONT 1
+
 namespace TESTSpace
 {
 
@@ -65,7 +68,6 @@ private:
     std::shared_ptr<std::array<float, 42>> m_testData;
     std::unique_ptr<RenderThread> m_renderThread{nullptr};
     std::vector<std::shared_ptr<GlFont> > m_words;
-    // std::unique_ptr<GlFont> m_word;
 
 
 protected:
@@ -83,6 +85,7 @@ private:
     void drawImage();
     void drawAxes();
     void drawRect() const;
+
     // TODO
     //  äÖÈ¾ÎÄ×Ö
     void drawFont() const;

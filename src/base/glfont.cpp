@@ -12,10 +12,8 @@ GlFont::GlFont()
     : m_fontVertexBuffer(make_unique<QOpenGLBuffer>(QOpenGLBuffer::VertexBuffer))
     , m_fontIndexBuffer(make_unique<QOpenGLBuffer>(QOpenGLBuffer::IndexBuffer))
     , m_fontArrayBuffer(make_unique<QOpenGLVertexArrayObject>())
-    // : m_fontVertexBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
-    // , m_fontIndexBuffer(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
-    // , m_fontArrayBuffer(new QOpenGLVertexArrayObject)
 {
+
 
 }
 
@@ -26,7 +24,7 @@ void GlFont::setString(const std::string str)
 
 void GlFont::draw(const QOpenGLContext& context, QOpenGLShaderProgram& shader)
 {
-    const auto functions = (context.functions());
+    const auto functions = context.functions();
     shader.bind();
     shader.setUniformValue("textColor",
         QVector3D(0, 0, 0));
